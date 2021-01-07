@@ -1,0 +1,149 @@
+<section class="section" id="registrarProducto">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                            <div class="card-title">
+                                <label for="" class="title-section">Registrar un nuevo producto</label>
+                            </div>
+                            <p class="paragraph">
+                                En esta seccion puedes registrar un nuevo producto, una nueva marca de producto y una nueva categoria.
+                            </p>
+                            <div class="productos-administrar">
+                                <button class="btn btn-administrar-productos" [routerLink]="['/administrar-productos']">Administrar los productos</button>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                            <form class="form-producto" [formGroup]="formProducto" (ngSubmit)="crearProducto()">
+                                <div class="form-group">
+                                    <div class="imgUpload">
+                                        <div class="containerImgUpload" id="containerImgUpload">
+                                            <img id="upload" [src]="imgSrc" alt="">
+                                        </div>
+                                        <div class="containerBtnUpload">
+                                            <input type="file" id="imgUpload" class="inputUpload" accept="image/*" (change)="selectImg($event.target.files);uploadImg($event);">
+                                            <label for="imgUpload">
+                                                <!-- <button class="btn btn-secondary btn-lg btnUpload">
+                                                    <span>Subir archivo</span>
+                                                </button> -->
+                                                <span class="btn btn-secondary btn-lg btnUpload">Subir archivo</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputNombre1">Nombre del producto</label>
+                                    <input type="text" class="form-control" id="inputNombre1" aria-describedby="emailHelp" formControlName="nombre">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputMarca">Marca</label>
+                                    <select class="custom-select" id="inputSelect" formControlName="marca">
+                                        <option value="" selected>Seleccione</option>
+                                        <option *ngFor="let marca of marcas" [ngValue]="marca">
+                                            {{marca.nombre}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputMarca">Categoría</label>
+                                    <select class="custom-select" id="inputSelect" formControlName="categoria">
+                                        <option value="" selected>Seleccione</option>
+                                        <option *ngFor="let categoria of categorias" [ngValue]="categoria">
+                                            {{categoria.nombre}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputMarca">Subcategoría</label>
+                                    <select class="custom-select" id="inputSelect" formControlName="subcategoria">
+                                        <option value="" selected>Seleccione</option>
+                                        <option *ngFor="let subcategoria of subcategorias" [ngValue]="subcategoria">
+                                            {{subcategoria.nombre}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPrecio">Precio</label>
+                                    <input type="number" class="form-control" id="inputPrecio" formControlName="precio"></div>
+                                <div class="form-group">
+                                    <label for="inputStock">Stock</label>
+                                    <input type="number" class="form-control" id="inputStock" formControlName="stock"></div>
+                                <div class="form-group form-group-stock">
+                                    <label for="inputContenido">Contenido neto</label>
+                                    <div class="group">
+                                        <input type="number" class="form-control" id="inputContenido" formControlName="contenidoNeto">
+                                        <select class="custom-select" id="inputSelect" formControlName="unidadMedida">
+                                            <option value="Gr" selected>Gramos</option>
+                                            <option value="Ml">Mililitros</option>
+                                            <option value="Oz">Onzas</option>
+                                            <option value="Lbs">Libras</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Descripción</label>
+                                    <textarea type="text" class="form-control" id="exampleInputPassword5" formControlName="descripcion"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-guardar-producto">Guardar nuevo producto</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <label for="" class="title-section">Registrar una nueva categoria</label>
+                            </div>
+                            <form [formGroup]="formCategoria" (ngSubmit)="guardarCategoria()">
+                                <div class="form-group">
+                                    <label for="inputNombre1">Nombre de la categoria</label>
+                                    <input type="text" class="form-control" id="inputNombre1" aria-describedby="emailHelp" formControlName="nombreCategoria">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-guardar-producto">Guardar nueva categoria</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <label for="" class="title-section">Registrar una nueva Subcategoria</label>
+                            </div>
+                            <form [formGroup]="formSubcategoria" (ngSubmit)="guardarSubcategoria()">
+                                <div class="form-group">
+                                    <label for="inputNombre1">Nombre de la Subcategoria</label>
+                                    <input type="text" class="form-control" id="inputNombre1" aria-describedby="emailHelp" formControlName="nombreSubcategoria">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-guardar-producto">Guardar nueva Subcategoria</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <label for="" class="title-section">Registrar una nueva marca</label>
+                            </div>
+                            <form [formGroup]="formMarca" (ngSubmit)="guardarMarca()">
+                                <div class="form-group">
+                                    <label for="inputNombre1">Nombre de la marca</label>
+                                    <input type="text" class="form-control" id="inputNombre1" aria-describedby="emailHelp" formControlName="nombreMarca">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-guardar-producto">Guardar nueva marca</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

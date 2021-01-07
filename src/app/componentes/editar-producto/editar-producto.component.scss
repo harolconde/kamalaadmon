@@ -1,0 +1,118 @@
+$primary-color: #F0A5BC;
+$secondary-color: #262F56;
+$grid-breakpoints: ( // Extra small screen / phone
+"xs": 0, // Small screen / phone
+"sm": 576px, // Medium screen / tablet
+"md": 768px, // Large screen / desktop
+"lg": 992px, // Extra large screen / wide desktop
+"xl": 1200px);
+// Media queries
+@mixin responsiveMovil() {
+    @media (min-width: map-get($grid-breakpoints, "xs")) and (max-width: map-get($grid-breakpoints, "md")) {
+        @content;
+    }
+}
+
+@mixin responsiveMovilTable {
+    @media (min-width: map-get($grid-breakpoints, "xs")) and (max-width: map-get($grid-breakpoints, "lg")) {
+        @content;
+    }
+}
+
+#section-producto-detalle {
+    .container {
+        .card {
+            align-items: center;
+            .img {
+                width: 300px;
+                height: auto;
+            }
+            .card-body {
+                .card-title {
+                    .title-section {
+                        font-size: 1.5rem;
+                    }
+                }
+                .form-producto {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    .form-group {
+                        width: 300px;
+                        margin-bottom: 8px;
+                        .custom-select {
+                            border: 1px solid #ddd;
+                            border-radius: 0;
+                            height: 35px;
+                        }
+                        .imgUpload {
+                            width: 300px;
+                            border-radius: 50px;
+                            .containerImgUpload {
+                                width: 300px;
+                                height: 300px;
+                                border: 1px solid #ddd;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                overflow: hidden;
+                                #upload {
+                                    width: 300px;
+                                }
+                            }
+                            .containerBtnUpload {
+                                .inputUpload {
+                                    visibility: hidden;
+                                }
+                                label {
+                                    width: 100%;
+                                    border-radius: 50px;
+                                    .btnUpload {
+                                        width: 50%;
+                                        border-radius: 50px;
+                                        height: 40px;
+                                        display: flex;
+                                        align-items: center;
+                                        font-size: 1.1rem;
+                                    }
+                                }
+                            }
+                        }
+                        .form-control {
+                            border: 1px solid #ddd;
+                            border-radius: 0;
+                            height: 35px;
+                        }
+                        &.form-group-stock {
+                            .group {
+                                display: flex;
+                                .form-control {
+                                    width: 75%;
+                                    border: 1px solid #ddd;
+                                    border-radius: 0;
+                                }
+                                .custom-select {
+                                    width: 23%;
+                                    margin-left: 10px;
+                                    border: 1px solid #ddd;
+                                    border-radius: 0;
+                                    height: 35px;
+                                }
+                            }
+                        }
+                    }
+                }
+                .btn-guardar-producto {
+                    margin-top: 10px;
+                    width: 300px;
+                    border-radius: 50px;
+                    height: 45px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}

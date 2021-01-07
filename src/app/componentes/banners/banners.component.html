@@ -1,0 +1,63 @@
+<section id="section-banners" class="section">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7"></div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5">
+            <div class="card">
+                <div class="card-header">
+                    <label for="" class="title-section">Subir un nuevo <br>banner</label>
+                </div>
+                <div class="card-body">
+                    <cite class="description">Sube un nuevo banner publicitario, los <br>cambios se verán inmediatamente en <br>la tienda virtual KÁMALA.</cite>
+                    <form [formGroup]="formBanner" class="form-banner" (ngSubmit)="crearBanner()">
+                        <div class="form-group">
+                            <div class="imgUpload">
+                                <div class="containerImgUpload" id="containerImgUpload">
+                                    <img id="upload" [src]="imgSrc" alt="">
+                                </div>
+                                <div class="containerBtnUpload">
+                                    <input type="file" id="imgUpload" class="inputUpload" accept="image/*" (change)="selectImg($event.target.files);uploadImg($event);">
+                                    <label for="imgUpload">
+                                        <!-- <button class="btn btn-secondary btn-lg btnUpload">
+                                            <span>Subir archivo</span>
+                                        </button> -->
+                                        <span class="btn btn-secondary btn-lg btnUpload">Subir archivo</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-group-data">
+                            <div class="form-group form-group-stock">
+                                <label for="inputContenido">Selecciona marca</label>
+                                <div class="group">
+                                    <select class="custom-select" id="inputSelectMarca" formControlName="marca">
+                                        <option *ngFor="let marca of marcas" [ngValue]="marca.id">{{marca.nombre}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-stock">
+                                <label for="inputContenido">Selecciona categoria</label>
+                                <div class="group">
+                                    <select class="custom-select" id="inputSelectCategoria" formControlName="categoria">
+                                        <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">{{categoria.nombre}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group form-group-stock">
+                            <label for="inputContenido">Selecciona producto (Proximamente)</label>
+                            <div class="group">
+                                <select class="custom-select" id="inputSelect" formControlName="producto" disabled>
+                                    <option selected>Gr</option>
+                                    <option value="2">Ml</option>
+                                    <option value="3">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-guardar-banner">Guardar nuevo banner</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

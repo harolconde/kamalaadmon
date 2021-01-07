@@ -1,0 +1,63 @@
+<section class="section-tips-belleza" id="section-tips-belleza">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-crear-tip">
+            <div class="card">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 col-description">
+                        <h3>Crea un nuevo tip</h3>
+                        <p class="paragraph">
+                            Puedes crear aquí un nuevo tip de belleza y mostrarlo en la tienda web de Kamala
+                        </p>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-creation">
+                        <form class="form-tip" [formGroup]="formTip" (ngSubmit)="crearTip()">
+                            <div class="form-group">
+                                <div class="imgUpload">
+                                    <div class="containerImgUpload" id="containerImgUpload">
+                                        <img id="upload" [src]="imgSrc" alt="">
+                                    </div>
+                                    <div class="containerBtnUpload">
+                                        <input type="file" id="imgUpload" class="inputUpload" accept="image/*" (change)="selectImg($event.target.files);uploadImg($event);">
+                                        <label for="imgUpload">
+                                            <!-- <button class="btn btn-secondary btn-lg btnUpload">
+                                                                                                                                        <span>Subir archivo</span>
+                                                                                                                                    </button> -->
+                                            <span class="btn btn-secondary btn-lg btnUpload">Subir archivo</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputNombre1">Titulo del tip</label>
+                                <input type="text" class="form-control" id="inputNombre1" aria-describedby="emailHelp" formcontrolname="titulo">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputMarca">Link a red social</label>
+                                <input type="text" class="form-control" id="inputNombre1" aria-describedby="emailHelp" formcontrolname="link">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Descripción</label>
+                                <textarea type="text" class="form-control" id="exampleInputPassword5" formcontrolname="descripcion"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-guardar-tip">Crear nuevo tip de belleza</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-mostrar-tips">
+            <h3 class="title-tips">Tips creados</h3>
+            <p class="paragraph">Tips actualmente creados</p>
+            <div class="container-card-tip">
+                <div class="card" *ngFor="let tip of tips">
+                    <a class="link" [href]="[tip.link]" target="_blank" rel="noopener noreferrer">
+                        <img class="img" src="{{tip.img}}" alt="{{tip.titulo}}">
+                    </a>
+                    <div class="card-footer">
+                        <button class="btn btn-eliminar" (click)="eliminarTip(tip)">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

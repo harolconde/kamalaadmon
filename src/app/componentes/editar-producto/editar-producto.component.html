@@ -1,0 +1,67 @@
+<section class="section-producto-detalle" id="section-producto-detalle">
+    <div *ngIf="productoDetalle | async as producto">
+        <div class="container">
+            <div class="card">
+                <img class="img" src="{{producto.imgProducto}}" alt="{{producto.nombre}}">
+                <div class="card-body">
+                    <form class="form-producto" [formGroup]="formProducto" (ngSubmit)="actualizarProducto(producto.id, producto.imgProducto)">
+                        <div class="form-group">
+                            <label for="inputNombre1">Nombre del producto</label>
+                            <input type="text" class="form-control" id="inputNombre1" placeholder="{{producto.nombre}}" aria-describedby="emailHelp" formControlName="nombre">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputMarca">Marca</label>
+                            <select class="custom-select" id="inputSelect" formControlName="marca">
+                                <option value="" selected>Seleccione</option>
+                                <option *ngFor="let marca of marcas" [ngValue]="marca">
+                                    {{marca.nombre}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputMarca">Categoría</label>
+                            <select class="custom-select" id="inputSelect" formControlName="categoria">
+                                <option value="" selected>Seleccione</option>
+                                <option *ngFor="let categoria of categorias" [ngValue]="categoria">
+                                    {{categoria.nombre}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputMarca">Subcategoría</label>
+                            <select class="custom-select" id="inputSelect" formControlName="subcategoria">
+                                <option value="" selected>Seleccione</option>
+                                <option *ngFor="let subcategoria of subcategorias" [ngValue]="subcategoria">
+                                    {{subcategoria.nombre}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPrecio">Precio</label>
+                            <input type="number" class="form-control" id="inputPrecio" placeholder="{{producto.precio}}" formControlName="precio"></div>
+                        <div class="form-group">
+                            <label for="inputStock">Stock</label>
+                            <input type="number" class="form-control" id="inputStock" placeholder="{{producto.stock}}" formControlName="stock"></div>
+                        <div class="form-group form-group-stock">
+                            <label for="inputContenido">Contenido neto</label>
+                            <div class="group">
+                                <input type="number" class="form-control" id="inputContenido" placeholder="{{producto.contenidoNeto}}" formControlName="contenidoNeto">
+                                <select class="custom-select" id="inputSelect" formControlName="unidadMedida">
+                                    <option value="Gr" selected>Gramos</option>
+                                    <option value="Ml">Mililitros</option>
+                                    <option value="Oz">Onzas</option>
+                                    <option value="Lbs">Libras</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Descripción</label>
+                            <textarea type="text" class="form-control" id="exampleInputPassword5" placeholder="{{producto.descripcion}}" formControlName="descripcion"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-guardar-producto">Actualizar producto</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

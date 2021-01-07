@@ -1,0 +1,41 @@
+<section id="section-administrar-productos">
+    <div class="container">
+        <div class="container-card-administracion">
+            <div class="card card-producto" *ngFor="let item of todosLosProductos | paginate: { itemsPerPage: 8, currentPage:p}" [routerLink]="['/producto', item.id]">
+                <img [src]="item.imgProducto" [alt]="" [title]="item.nombre">
+                <div class="ver-mas-detalles">
+                    <button class="btn btn-ver-mas">
+                        +
+                    </button>
+                    <span class="texto-ver-mas">Ver mas</span>
+                </div>
+                <div class="center-elements">
+                    <span class="marca">{{item.marca.nombre}}</span>
+                    <span class="name-producto">{{item.nombre}}</span>
+                    <span class="precio">{{item.precio | currency: 'USD' : 'symbol': '3.0'}}</span>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-eliminar" (click)="eliminarProducto(item)">Eliminar</button><button class="btn btn-editar" [routerLink]="['/producto', item.id]">Editar</button>
+                </div>
+            </div>
+            <pagination-template #p1="paginationApi" (pageChange)="pageChange.emit($event);p = $event" class="paginationNgx">
+                <div class="pagination-previous" [class.disabled]="p1.isFirstPage()">
+                    <a *ngIf="!p1.isFirstPage()" (click)="p1.previous()" class="arrowPagination arrowPrevius"> <img [src]="'assets/logos/pagination/chevron-back-outline.png'" class="arrowPagination arrowPrevius" alt="Anterior"> </a>
+                </div>
+
+                <div *ngFor="let page of p1.pages" [class.current]="p1.getCurrent() === page.value">
+                    <a (click)="p1.setCurrent(page.value)" *ngIf="p1.getCurrent() !== page.value">
+                        <span>{{ page.label }}</span>
+                    </a>
+                    <div *ngIf="p1.getCurrent() === page.value">
+                        <span>{{ page.label }}</span>
+                    </div>
+                </div>
+
+                <div class="pagination-next" [class.disabled]="p1.isLastPage()">
+                    <a *ngIf="!p1.isLastPage()" (click)="p1.next()" class="arrowPagination arrowNext"> <img [src]="'assets/logos/pagination/chevron-forward-outline.png'" class="arrowPagination arrowNext" alt="Siguiente"></a>
+                </div>
+            </pagination-template>
+        </div>
+    </div>
+</section>

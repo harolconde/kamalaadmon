@@ -1,0 +1,181 @@
+    $grid-breakpoints: ( // Extra small screen / phone
+    "xs": 0, // Small screen / phone
+    "sm": 576px, // Medium screen / tablet
+    "md": 768px, // Large screen / desktop
+    "lg": 992px, // Extra large screen / wide desktop
+    "xl": 1200px);
+    // Color
+    $primary-color: #F0A5BC;
+    $secondary-color: #262F56;
+    // Media queries
+    @mixin responsiveMovil () {
+        @media (min-width: map-get($grid-breakpoints, "xs")) and (max-width: map-get($grid-breakpoints, "md")) {
+            @content;
+        }
+    }
+    
+    @mixin responsiveMovilTable {
+        @media (min-width: map-get($grid-breakpoints, "xs")) and (max-width: map-get($grid-breakpoints, "lg")) {
+            @content;
+        }
+    }
+    
+    @media (min-width: 1200px) {
+        .container-xl,
+        .container-lg,
+        .container-md,
+        .container-sm,
+        .container {
+            max-width: 70%;
+        }
+    }
+    
+    #section-administrar-productos {
+        min-height: 515px;
+        .container {
+            .container-card-administracion {
+                display: flex;
+                align-items: center;
+                margin-bottom: 40px;
+                margin-top: 40px;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                .card-producto {
+                    width: 14rem;
+                    margin: 10px;
+                    border: 1px solid rgba($color: #ddd, $alpha: 0.1);
+                    cursor: pointer;
+                    position: relative;
+                    @include responsiveMovil {
+                        width: 100%;
+                    }
+                    img {
+                        width: 80%;
+                        display: block;
+                        margin: 0 auto;
+                    }
+                    .ver-mas-detalles {
+                        display: none;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        position: absolute;
+                        width: 100%;
+                        height: auto;
+                        top: 40%;
+                        .btn-ver-mas {
+                            width: 30px;
+                            height: 30px;
+                            background-color: rgba($color: $primary-color, $alpha: 0.6);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: $secondary-color;
+                            font-weight: bold;
+                            border-radius: 50px;
+                            border: 1px solid $primary-color;
+                        }
+                        .texto-ver-mas {
+                            color: $secondary-color;
+                            text-transform: uppercase;
+                        }
+                    }
+                    .center-elements {
+                        display: flex;
+                        align-items: center;
+                        flex-direction: column;
+                        justify-content: center;
+                        text-align: center;
+                        margin-top: 40px;
+                        .item-product-label {
+                            font-style: normal;
+                        }
+                        .marca {
+                            font-family: 'Roboto', sans-serif, Verdana;
+                            font-size: 14px;
+                            font-weight: 300;
+                            color: #666666;
+                            text-transform: uppercase;
+                        }
+                        .name-producto {
+                            font-size: 16px;
+                            font-weight: 500;
+                            display: block;
+                            height: 50px;
+                            width: 220px;
+                            margin-top: 10px;
+                            line-height: 18px
+                        }
+                        .precio {
+                            font-size: 25px;
+                            font-weight: 400;
+                            margin-bottom: 20px;
+                        }
+                    }
+                    .card-footer {
+                        display: flex;
+                        justify-content: space-between;
+                        .btn {
+                            width: 48%;
+                            border-radius: 50px;
+                            &.btn-eliminar {
+                                background-color: $primary-color;
+                                color: $secondary-color;
+                            }
+                            &.btn-editar {
+                                background-color: $secondary-color;
+                                color: $primary-color;
+                            }
+                        }
+                    }
+                }
+                // .card-producto:hover {
+                //     .ver-mas-detalles {
+                //         display: flex;
+                //     }
+                // }
+                .paginationNgx {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 30px;
+                    .pagination-previous {
+                        width: 25px;
+                        height: auto;
+                        margin-right: 10px;
+                        background-color: $secondary-color;
+                        border-radius: 5px 0px 0px 5px;
+                        .arrowPrevius {
+                            // transform: rotate(0.25turn);
+                            width: 25px;
+                            cursor: pointer;
+                        }
+                    }
+                    .current {
+                        font-size: 1rem;
+                        div {
+                            width: 25px;
+                            text-align: center;
+                            span {
+                                font-weight: 800;
+                                color: $primary-color;
+                            }
+                        }
+                    }
+                    .pagination-next {
+                        width: 25px;
+                        height: auto;
+                        margin-left: 10px;
+                        background-color: $secondary-color;
+                        border-radius: 0px 5px 5px 0px;
+                        .arrowNext {
+                            //transform: rotate(0.75turn);
+                            width: 25px;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
