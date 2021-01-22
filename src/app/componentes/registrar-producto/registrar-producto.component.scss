@@ -33,6 +33,20 @@ $grid-breakpoints: ( // Extra small screen / phone
                             font-size: 1.5rem;
                         }
                     }
+                    .productos-administrar {
+                        margin-top: 40px;
+                        .btn-administrar-productos {
+                            background-color: $primary-color;
+                            border-radius: 50px;
+                            color: $secondary-color;
+                            display: flex;
+                            align-items: center;
+                            font-weight: 600;
+                            justify-content: center;
+                            padding-left: 1rem;
+                            padding-right: 1rem;
+                        }
+                    }
                     .form-producto {
                         display: flex;
                         align-items: center;

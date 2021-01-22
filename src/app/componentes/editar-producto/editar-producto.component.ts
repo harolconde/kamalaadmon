@@ -44,14 +44,14 @@ export class EditarProductoComponent implements OnInit {
     constructor(private route: ActivatedRoute, private producto: ProductosService, private formBuilder: FormBuilder) {
         this.formProducto = this.formBuilder.group({
             nombre: new FormControl("", Validators.required),
-            marca: "",
-            categoria: "",
+            marca: ["", Validators.required],
+            categoria: ["", Validators.required],
             precio: new FormControl("", Validators.required),
             stock: new FormControl("", Validators.required),
             contenidoNeto: new FormControl("", Validators.required),
             unidadMedida: new FormControl("", Validators.required),
             descripcion: new FormControl("", Validators.required),
-            subcategoria: ""
+            subcategoria: ["", Validators.required]
         });
     }
 
@@ -77,26 +77,32 @@ export class EditarProductoComponent implements OnInit {
         const categoria = this.formProducto.get("categoria").value;
         const subcategoria = this.formProducto.get("subcategoria").value;
         // this.subcategoriaArray.push(this.formProducto.get("subcategoria").value);
-        const precio = parseInt(this.formProducto.get("precio").value);
-        const stock = parseInt(this.formProducto.get("stock").value);
+        let precio = parseInt(this.formProducto.get("precio").value);
+        let stock = parseInt(this.formProducto.get("stock").value);
         const contenidoNeto = parseFloat(this.formProducto.get("contenidoNeto").value);
-        const unidadMedida = this.formProducto.get("unidadMedida").value;
+        let unidadMedida = this.formProducto.get("unidadMedida").value;
         const descripcion = this.formProducto.get("descripcion").value;
-        let nuevoProducto: Producto = {
-            imgProducto: urlImagen,
-            nombre: nombre,
-            marca: marca,
-            categoria: categoria,
-            subcategoria: subcategoria,
-            precio: precio,
-            stock: stock,
-            contenidoNeto: contenidoNeto,
-            unidadMedida: unidadMedida,
-            descripcion: descripcion
-        }
 
-        this.producto.updateProducto(nuevoProducto, idProducto);
-        this.resetProductos();
+        // Validacion 
+        if(this.formProducto.valid){
+            let nuevoProducto: Producto = {
+                imgProducto: urlImagen,
+                nombre: nombre,
+                marca: marca,
+                categoria: categoria,
+                subcategoria: subcategoria,
+                precio: precio,
+                stock: stock,
+                contenidoNeto: contenidoNeto,
+                unidadMedida: unidadMedida,
+                descripcion: descripcion
+            }
+            this.producto.updateProducto(nuevoProducto, idProducto);
+            this.resetProductos();
+        } else {
+            alert("Faltan campos por llenar, favor llenar todos los campos");
+        }
+        
     }
 
      // Mostrar todas las marcas.
