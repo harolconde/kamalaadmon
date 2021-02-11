@@ -41,6 +41,12 @@ export class EditarProductoComponent implements OnInit {
         nombreMarca: new FormControl("", Validators.required)
     });
 
+    public unidadesMedida: Array<any> = [
+        {id: 1, unidad:"Gr", nombre: "Gramos"},
+        {id: 2, unidad:"Ml", nombre: "Mililitros"},
+        {id: 3, unidad:"Oz", nombre: "Onzas"},
+        {id: 4, unidad:"Lb", nombre: "Libras"},
+    ] 
     constructor(private route: ActivatedRoute, private producto: ProductosService, private formBuilder: FormBuilder) {
         this.formProducto = this.formBuilder.group({
             nombre: new FormControl("", Validators.required),
@@ -84,7 +90,7 @@ export class EditarProductoComponent implements OnInit {
         const descripcion = this.formProducto.get("descripcion").value;
 
         // Validacion 
-        if(this.formProducto.valid){
+        if (this.formProducto.valid) {
             let nuevoProducto: Producto = {
                 imgProducto: urlImagen,
                 nombre: nombre,
@@ -95,33 +101,32 @@ export class EditarProductoComponent implements OnInit {
                 stock: stock,
                 contenidoNeto: contenidoNeto,
                 unidadMedida: unidadMedida,
-                descripcion: descripcion
+                descripcion: descripcion,
+                estado: true
             }
             this.producto.updateProducto(nuevoProducto, idProducto);
             this.resetProductos();
         } else {
-            alert("Faltan campos por llenar, favor llenar todos los campos");
+            alert("Faltan campos por llenar, favor llenar");
         }
-        
     }
-
      // Mostrar todas las marcas.
-     public mostrarMarcas(){
+    public mostrarMarcas() {
         this.producto.getMarcas().subscribe(data => {
             this.marcas = data;
-            console.log(this.marcas); 
+            console.log(this.marcas);
         });
     }
 
     // Mostrar todas las categorias
-    public mostrarCategorias(){
+    public mostrarCategorias() {
         this.producto.getCategorias().subscribe(data => {
             this.categorias = data;
         })
     }
 
     // Mostrar todas las subcategorias
-    public mostrarSubcategorias(){
+    public mostrarSubcategorias() {
         this.producto.getSubcategorias().subscribe(data => {
             this.subcategorias = data;
             console.log(data);
@@ -133,4 +138,39 @@ export class EditarProductoComponent implements OnInit {
         return this.formProducto.reset();
     }
 
+    public deshabilitarProducto(producto: Producto) {
+        if(producto.estado == true){
+            let productoDeshabilitar: Producto = {
+                imgProducto: producto.imgProducto,
+                nombre: producto.nombre,
+                marca: producto.marca,
+                categoria: producto.categoria,
+                subcategoria: producto.subcategoria,
+                precio: producto.precio,
+                stock: producto.stock,
+                contenidoNeto: producto.contenidoNeto,
+                unidadMedida: producto.unidadMedida,
+                descripcion: producto.descripcion,
+                estado: false
+            }
+
+            this.producto.updateProducto(productoDeshabilitar, producto.id);
+        } else {
+            let productoDeshabilitar: Producto = {
+                imgProducto: producto.imgProducto,
+                nombre: producto.nombre,
+                marca: producto.marca,
+                categoria: producto.categoria,
+                subcategoria: producto.subcategoria,
+                precio: producto.precio,
+                stock: producto.stock,
+                contenidoNeto: producto.contenidoNeto,
+                unidadMedida: producto.unidadMedida,
+                descripcion: producto.descripcion,
+                estado: true
+            }
+
+            this.producto.updateProducto(productoDeshabilitar, producto.id);
+        }
+    }
 }

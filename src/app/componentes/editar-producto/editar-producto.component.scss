@@ -23,6 +23,8 @@ $grid-breakpoints: ( // Extra small screen / phone
     .container {
         .card {
             align-items: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
             .img {
                 width: 300px;
                 height: auto;
@@ -112,6 +114,14 @@ $grid-breakpoints: ( // Extra small screen / phone
                     align-items: center;
                     justify-content: center;
                 }
+            }
+            .btn-deshabilitar{
+                width: 300px;
+                border-radius: 50px;
+                height: 45px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         }
     }

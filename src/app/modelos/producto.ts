@@ -17,5 +17,6 @@ export interface Producto {
     stock: number;
     categoria?: Array<Categoria>;
     subcategoria?: Array<Subcategoria>;
+    estado?: boolean
     //idCategoria?: string;  
 }
