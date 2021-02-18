@@ -8,6 +8,7 @@ import { Producto } from 'src/app/modelos/producto';
 import { ProductosService } from 'src/app/servicios/productos.service';
 import { Categoria } from '../../modelos/categoria';
 import { Marca } from '../../modelos/marca';
+import { ContenidoNeto } from '../../modelos/contenido-neto';
 import { AngularFireStorage } from "@angular/fire/storage";
 import { finalize, isEmpty } from "rxjs/operators";
 import { Subcategoria } from 'src/app/modelos/subcategoria';
@@ -25,7 +26,7 @@ export class EditarProductoComponent implements OnInit {
     public marcas: Array<Marca> = [];
     public categorias: Array<Categoria> = [];
     public subcategorias: Array<any> = [];
-
+    public contenidos: Array<ContenidoNeto> = [];
     public formProducto: FormGroup;
 
 
@@ -35,7 +36,7 @@ export class EditarProductoComponent implements OnInit {
 
     public formSubcategoria = new FormGroup({
         nombreSubcategoria: new FormControl("", Validators.required)
-    })
+    });
 
     public formMarca = new FormGroup({
         nombreMarca: new FormControl("", Validators.required)
@@ -55,19 +56,18 @@ export class EditarProductoComponent implements OnInit {
             precio: new FormControl("", Validators.required),
             stock: new FormControl("", Validators.required),
             contenidoNeto: new FormControl("", Validators.required),
-            unidadMedida: new FormControl("", Validators.required),
+            unidadMedida: ["", Validators.required],
             descripcion: new FormControl("", Validators.required),
             subcategoria: ["", Validators.required]
         });
     }
-
-
 
     ngOnInit(): void {
         this.getIdProducto();
         this.mostrarMarcas();
         this.mostrarCategorias();
         this.mostrarSubcategorias();
+        this.mostrarContenidos();
     }
 
     public getIdProducto(): void {
@@ -130,6 +130,13 @@ export class EditarProductoComponent implements OnInit {
         this.producto.getSubcategorias().subscribe(data => {
             this.subcategorias = data;
             console.log(data);
+        })
+    }
+
+    // Mostrar todos los contenidos
+    public mostrarContenidos(){
+        this.producto.getContenidos().subscribe(data => {
+            this.contenidos = data;
         })
     }
 

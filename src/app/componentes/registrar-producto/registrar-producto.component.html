@@ -77,10 +77,10 @@
                                     <div class="group">
                                         <input type="number" class="form-control" id="inputContenido" formControlName="contenidoNeto">
                                         <select class="custom-select" id="inputSelect" formControlName="unidadMedida">
-                                            <option value="Gr" selected>Gramos</option>
-                                            <option value="Ml">Mililitros</option>
-                                            <option value="Oz">Onzas</option>
-                                            <option value="Lbs">Libras</option>
+                                            <option value="" selected>Seleccione</option>
+                                            <option value="" *ngFor="let contenido of contenidos" [ngValue]="contenido">
+                                                {{contenido.contenido}}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>

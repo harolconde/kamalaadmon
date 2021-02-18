@@ -11,6 +11,7 @@ import { Marca } from '../modelos/marca';
 import { Categoria } from '../modelos/categoria';
 import { toTypeScript } from '@angular/compiler';
 import { Subcategoria } from '../modelos/subcategoria';
+import { ContenidoNeto } from '../modelos/contenido-neto';
 
 @Injectable({
     providedIn: 'root'
@@ -36,6 +37,11 @@ export class ProductosService {
     private subcategorias: Observable<Subcategoria[]>;
     private subcategoriasDoc: AngularFirestoreDocument<Subcategoria>;
     private subcategoria: Observable<Subcategoria>;
+
+    private contenidoCollection: AngularFirestoreCollection<ContenidoNeto>;
+    private contenidos: Observable<ContenidoNeto[]>;
+    private contenidosDoc: AngularFirestoreCollection<ContenidoNeto>;
+    private contenido: Observable<ContenidoNeto>;
 
     constructor(private afs: AngularFirestore) { }
 
@@ -165,6 +171,18 @@ export class ProductosService {
         return this.subcategorias = this.subcategoriasCollection.snapshotChanges().pipe(map( (changes) => {
             return changes.map((action) => {
                 const data = action.payload.doc.data() as Subcategoria;
+                data.id = action.payload.doc.id;
+                return data;
+            })
+        }))
+    }
+
+    public getContenidos(): Observable<ContenidoNeto[]>{
+        this.contenidoCollection = this.afs.collection<ContenidoNeto>("contenido");
+        this.contenidos = this.contenidoCollection.valueChanges();
+        return this.contenidos = this.contenidoCollection.snapshotChanges().pipe(map((changes) => {
+            return changes.map((action) => {
+                const data = action.payload.doc.data() as ContenidoNeto;
                 data.id = action.payload.doc.id;
                 return data;
             })

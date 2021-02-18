@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { Producto } from '../../modelos/producto';
 import { Categoria } from '../../modelos/categoria';
 import { Marca } from '../../modelos/marca';
+import { ContenidoNeto } from '../../modelos/contenido-neto';
 import { ProductosService } from '../../servicios/productos.service';
 import { AngularFireStorage } from "@angular/fire/storage";
 import { from, Observable } from 'rxjs';
@@ -27,7 +28,7 @@ export class RegistrarProductoComponent implements OnInit {
     public marcaObject: Marca;
     public marcaArray: Array<Marca>;
     public subcategoriaArray: Array<Subcategoria> = [];
-
+    public contenidos: Array<ContenidoNeto> = [];
     // Variables objetos para "Marca", "Categoria" y Subcategoria
     public marcas: Array<Marca> = [];
     public categorias: Array<Categoria> = [];
@@ -53,6 +54,10 @@ export class RegistrarProductoComponent implements OnInit {
         nombreMarca: new FormControl("", Validators.required)
     });
 
+    public formContenido = new FormGroup({
+        contenidoNeto: new FormControl("", Validators.required)
+    });
+
     constructor(
         private producto: ProductosService,
         private storage: AngularFireStorage,
@@ -64,7 +69,7 @@ export class RegistrarProductoComponent implements OnInit {
             categoria: ["", Validators.required],
             precio: new FormControl("", Validators.required),
             stock: new FormControl("", Validators.required),
-            contenidoNeto: new FormControl("", Validators.required),
+            contenidoNeto: ["", Validators.required],
             unidadMedida: new FormControl("", Validators.required),
             descripcion: new FormControl("", Validators.required),
             subcategoria: ["", Validators.required]
@@ -75,6 +80,7 @@ export class RegistrarProductoComponent implements OnInit {
         this.mostrarMarcas();
         this.mostrarCategorias();
         this.mostrarSubcategorias();
+        this.mostrarContenidos();
     }
 
     // Captural imagen de perfil del usuario.
@@ -225,6 +231,13 @@ export class RegistrarProductoComponent implements OnInit {
         this.producto.getSubcategorias().subscribe(data => {
             this.subcategorias = data;
             console.log(data);
+        })
+    }
+
+    // Mostrar todos los tipos de contenidos
+    public mostrarContenidos(){
+        this.producto.getContenidos().subscribe(data => {
+            this.contenidos = data;
         })
     }
 

@@ -7,11 +7,11 @@
                     <form class="form-producto" [formGroup]="formProducto" (ngSubmit)="actualizarProducto(producto.id, producto.imgProducto)">
                         <div class="form-group">
                             <label for="inputNombre1">Nombre del producto</label>
-                            <input type="text" class="form-control" id="inputNombre1" placeholder="{{producto.nombre}}" [(ngModel)]="producto.nombre" aria-describedby="emailHelp" formcontrolname="nombre">
+                            <input type="text" class="form-control" id="inputNombre1" placeholder="{{producto.nombre}}" [(ngModel)]="producto.nombre" aria-describedby="emailHelp" formControlName="nombre">
                         </div>
                         <div class="form-group">
                             <label for="inputMarca">Marca</label>
-                            <select class="custom-select" id="inputSelect" [(ngModel)]="producto.marca" formcontrolname="marca">
+                            <select class="custom-select" id="inputSelect" [(ngModel)]="producto.marca" formControlName="marca">
                                 <option value="" selected>Seleccione</option>
                                 <option *ngFor="let marca of marcas" [ngValue]="marca">
                                     {{marca.nombre}}
@@ -20,7 +20,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputMarca">Categoría</label>
-                            <select class="custom-select" id="inputSelect" [(ngModel)]="producto.categoria" formcontrolname="categoria">
+                            <select class="custom-select" id="inputSelect" [(ngModel)]="producto.categoria" formControlName="categoria">
                                 <option value="" selected>Seleccione</option>
                                 <option *ngFor="let categoria of categorias" [ngValue]="categoria">
                                     {{categoria.nombre}}
@@ -29,7 +29,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputMarca">Subcategoría</label>
-                            <select class="custom-select" id="inputSelect" [(ngModel)]="producto.subcategoria" formcontrolname="subcategoria">
+                            <select class="custom-select" id="inputSelect" [(ngModel)]="producto.subcategoria" formControlName="subcategoria">
                                 <option value="" selected>Seleccione</option>
                                 <option *ngFor="let subcategoria of subcategorias" [ngValue]="subcategoria">
                                     {{subcategoria.nombre}}
@@ -38,25 +38,25 @@
                         </div>
                         <div class="form-group">
                             <label for="inputPrecio">Precio</label>
-                            <input type="number" class="form-control" id="inputPrecio" [(ngModel)]="producto.precio" placeholder="{{producto.precio}}" formcontrolname="precio"></div>
+                            <input type="number" class="form-control" id="inputPrecio" [(ngModel)]="producto.precio" formControlName="precio"></div>
                         <div class="form-group">
                             <label for="inputStock">Stock</label>
-                            <input type="number" class="form-control" id="inputStock" [(ngModel)]="producto.stock" placeholder="{{producto.stock}}" formcontrolname="stock"></div>
+                            <input type="number" class="form-control" id="inputStock" [(ngModel)]="producto.stock" formControlName="stock"></div>
                         <div class="form-group form-group-stock">
                             <label for="inputContenido">Contenido neto</label>
                             <div class="group">
-                                <input type="number" class="form-control" id="inputContenido" [(ngModel)]="producto.contenidoNeto" placeholder="{{producto.contenidoNeto}}" formcontrolname="contenidoNeto">
-                                <select class="custom-select" id="inputSelect" [(ngModel)]="producto.unidadMedida" formcontrolname="unidadMedida">
+                                <input type="number" class="form-control" id="inputContenido" [(ngModel)]="producto.contenidoNeto" formControlName="contenidoNeto">
+                                <select class="custom-select" id="inputSelect" [(ngModel)]="producto.unidadMedida" formControlName="unidadMedida">
                                     <option value="" selected="selected">Seleccione</option>
-                                    <option *ngFor="let unidad of unidadesMedida" [ngValue]="unidad.unidad">
-                                        {{unidad.nombre}}
+                                    <option *ngFor="let unidad of contenidos" [ngValue]="unidad">
+                                        {{unidad.contenido}}
                                     </option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Descripción</label>
-                            <textarea type="text" class="form-control" id="exampleInputPassword5" [(ngModel)]="producto.descripcion" placeholder="{{producto.descripcion}}" formcontrolname="descripcion"></textarea>
+                            <textarea type="text" class="form-control" id="exampleInputPassword5" [(ngModel)]="producto.descripcion" placeholder="{{producto.descripcion}}" formControlName="descripcion"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-guardar-producto">Actualizar producto</button>
                     </form>
